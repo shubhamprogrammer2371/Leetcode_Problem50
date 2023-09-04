@@ -1,0 +1,40 @@
+double pow2(double x, long n) 
+{
+    if(n == 0) 
+        return 1;
+    if(n % 2 == 0) 
+        return pow2(x * x, n/2);
+    else 
+        return x * pow2(x * x, (n - 1)/2);
+}
+
+double myPow(double x, int n) {
+    long N = n;
+    if(n < 0) 
+    {
+        N = -N;
+        x = 1/x;
+    }
+    return pow2(x, N);
+}
+
+
+----------------------------------------------------------
+
+
+double myPow(double x, int n) {
+  double sum = 1.0;
+
+  int sign = n < 0 ? -1 : 1;
+  unsigned int nn = (unsigned int) n * sign; // let "nn" = positive "n"
+
+  while (nn) 
+  {
+    if (nn & 1)
+      sum *= x;
+    nn >>= 1;
+    x *= x;
+  }
+
+  return sign == 1 ? sum : 1.0 / sum;
+}
